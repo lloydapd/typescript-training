@@ -3,8 +3,11 @@ import type { NextPage } from 'next'
 import Head from 'next/head'
 import Image from 'next/image'
 import styles from '../styles/Home.module.css'
+import { Box, Button, Text } from '@chakra-ui/react'
 
 const Home: NextPage = () => {
+  const [count, setCount] = useState(0)
+
   let number: number
   let boolean: boolean
   let string: string
@@ -35,7 +38,7 @@ const Home: NextPage = () => {
   class Messaging {
 
     constructor(public a?: string, public b?: string) {
- 
+
     }
 
     message() {
@@ -43,6 +46,19 @@ const Home: NextPage = () => {
     }
   }
 
+  class Count {
+    increment() {
+      setCount(count + 1)
+    }
+    decrement() {
+      setCount(count - 1)
+      if(count == 0) {
+        setCount(0)
+      }
+    }
+  }
+
+  const c = new Count()
   const m = new Messaging()
   m.message()
 
@@ -54,6 +70,9 @@ const Home: NextPage = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
+      <Button onClick={() => c.increment()}>+</Button>
+      <Text>{count}</Text>
+      <Button onClick={() => c.decrement()}>-</Button>
       
     </div>
   )
